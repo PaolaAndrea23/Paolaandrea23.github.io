@@ -29,26 +29,42 @@
 
     <!-- Sección principal -->
     <section class="main-banner">
-      <img
-        src="img/Logo.jpg"
-        alt="Logo Bendito Pastel Grande"
-        class="banner-logo"
-      />
-      <h1>Bendito Pastel</h1>
-      <p class="slogan">Pecados hechos con amor</p>
-      <p class="since">Since 2023</p>
-      <p class="descripcion">
-        Disfruta de nuestros postres artesanales, hechos con los mejores
-        ingredientes y una pizca de cariño. ¡Déjate tentar por nuestros sabores
-        únicos!
-      </p>
-      <!-- Botón que redirige a la página de contacto con formularios -->
-      <a href="contacto.html" class="btn-cta">Contáctanos</a>
+      <!-- Elementos decorativos de pastelería -->
+      <div class="ingredient-decoration strawberry">🧁</div>
+      <div class="ingredient-decoration chocolate">🎂</div>
+      <div class="ingredient-decoration vanilla">🍰</div>
+      
+      <!-- Estrellas doradas decorativas -->
+      <div class="golden-star star-1">⭐</div>
+      <div class="golden-star star-2">✨</div>
+      <div class="golden-star star-3">🌟</div>
+      
+      <div class="banner-content">
+        <img
+          src="img/Logo.jpg"
+          alt="Logo Bendito Pastel Grande"
+          class="banner-logo"
+        />
+        <h1>Bendito Pastel</h1>
+        <p class="slogan">Pecados hechos con amor</p>
+        <p class="since">Since 2023</p>
+        <p class="descripcion">
+          Disfruta de nuestros postres artesanales, hechos con los mejores
+          ingredientes y una pizca de cariño. ¡Déjate tentar por nuestros sabores
+          únicos!
+        </p>
+        <!-- Botón que redirige a la página de contacto con formularios -->
+        <a href="contacto.html" class="btn-cta">Contáctanos</a>
+      </div>
     </section>
 
     <!-- Sección de últimos pecados -->
     <section class="ultimos-pecados" id="productos">
+      <!-- Marco dorado decorativo -->
+      <div class="golden-frame"></div>
+      
       <h2>Últimos pecados</h2>
+      <p class="decorative-subtitle">Delicias recién salidas del horno</p>
       <div class="slider-container">
         <div class="slider-wrapper">
           <div class="slider-track" id="slider-track">
@@ -197,6 +213,12 @@
     <div id="image-modal" class="modal">
       <span class="modal-close" onclick="closeModal()">&times;</span>
       <img class="modal-content" id="modal-image" src="" alt="">
+    </div>
+
+    <!-- Botón flotante de WhatsApp -->
+    <div class="whatsapp-float" onclick="openWhatsApp()">
+      <div class="whatsapp-icon">💬</div>
+      <div class="whatsapp-text">¡Contáctanos!</div>
     </div>
 
     <!-- Referencia al archivo JavaScript -->

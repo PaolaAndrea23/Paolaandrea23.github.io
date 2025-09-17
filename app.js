@@ -178,4 +178,12 @@ document.addEventListener('click', function(event) {
   if (event.target === modal) {
     closeModal();
   }
-}); 
+});
+
+// Función para abrir WhatsApp
+function openWhatsApp() {
+  const phoneNumber = '573176641807';
+  const message = '¡Hola! Me interesa conocer más sobre los deliciosos postres de Bendito Pastel 🧁🎂';
+  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+} 
