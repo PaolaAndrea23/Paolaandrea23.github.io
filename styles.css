@@ -417,24 +417,24 @@ body {
 }
 
 .ingredient-decoration.strawberry {
-    top: 15%;
-    left: 10%;
+    top: 10%;
+    left: 8%;
     animation-delay: 0s;
 }
 
 .ingredient-decoration.chocolate {
-    top: 25%;
-    right: 15%;
+    top: 20%;
+    right: 12%;
     animation-delay: 1s;
 }
 
 .ingredient-decoration.vanilla {
-    bottom: 20%;
-    left: 8%;
+    bottom: 15%;
+    left: 5%;
     animation-delay: 2s;
 }
 
-/* Herramientas de panadería */
+/* Elementos de pastelería adicionales */
 .bakery-tool {
     position: absolute;
     font-size: 1.8rem;
@@ -444,21 +444,27 @@ body {
 }
 
 .bakery-tool.tool-1 {
-    top: 10%;
-    right: 20%;
+    top: 35%;
+    right: 8%;
     animation-delay: 0.5s;
 }
 
 .bakery-tool.tool-2 {
-    top: 60%;
-    left: 5%;
+    top: 65%;
+    left: 12%;
     animation-delay: 1.5s;
 }
 
 .bakery-tool.tool-3 {
-    bottom: 15%;
-    right: 10%;
+    bottom: 25%;
+    right: 5%;
     animation-delay: 2.5s;
+}
+
+.bakery-tool.tool-4 {
+    top: 45%;
+    left: 15%;
+    animation-delay: 3s;
 }
 
 /* Marco dorado decorativo */
