@@ -57,9 +57,46 @@ let currentSlideIndex = 0;
 let slides, dots, totalSlides;
 
 function initSlider() {
+  // Array de imágenes - fácil de expandir agregando más números
+  // Para agregar más imágenes, simplemente agrega el número al array
+  // Ejemplo: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  const imageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+  
+  const sliderTrack = document.getElementById('slider-track');
+  const sliderDots = document.getElementById('slider-dots');
+  
+  if (!sliderTrack || !sliderDots) return;
+  
+  // Limpiar contenido existente
+  sliderTrack.innerHTML = '';
+  sliderDots.innerHTML = '';
+  
+  // Generar slides y dots dinámicamente
+  imageNumbers.forEach((number, index) => {
+    // Crear slide
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    slide.style.width = `${100 / imageNumbers.length}%`;
+    slide.innerHTML = `<img src="img/UltimosPecados${number}.jpg" alt="Último pecado ${number}" onclick="openModal(this)" />`;
+    sliderTrack.appendChild(slide);
+    
+    // Crear dot
+    const dot = document.createElement('span');
+    dot.className = index === 0 ? 'dot active' : 'dot';
+    dot.onclick = () => currentSlide(index + 1);
+    sliderDots.appendChild(dot);
+  });
+  
+  // Establecer el ancho total del slider-track
+  sliderTrack.style.width = `${imageNumbers.length * 100}%`;
+  
+  // Actualizar variables globales
   slides = document.querySelectorAll('.slide');
   dots = document.querySelectorAll('.dot');
   totalSlides = slides.length;
+  
+  // Inicializar el slider
+  showSlide(0);
 }
 
 function showSlide(index) {

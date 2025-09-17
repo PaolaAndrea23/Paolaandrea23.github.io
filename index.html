@@ -52,35 +52,13 @@
       <div class="slider-container">
         <div class="slider-wrapper">
           <div class="slider-track" id="slider-track">
-            <div class="slide">
-              <img src="img/UltimosPecados1.jpg" alt="Último pecado 1" onclick="openModal(this)" />
-            </div>
-            <div class="slide">
-              <img src="img/UltimosPecados2.jpg" alt="Último pecado 2" onclick="openModal(this)" />
-            </div>
-            <div class="slide">
-              <img src="img/UltimosPecados3.jpg" alt="Último pecado 3" onclick="openModal(this)" />
-            </div>
-            <div class="slide">
-              <img src="img/UltimosPecados4.jpg" alt="Último pecado 4" onclick="openModal(this)" />
-            </div>
-            <div class="slide">
-              <img src="img/UltimosPecados5.jpg" alt="Último pecado 5" onclick="openModal(this)" />
-            </div>
-            <div class="slide">
-              <img src="img/UltimosPecados6.jpg" alt="Último pecado 6" onclick="openModal(this)" />
-            </div>
+            <!-- Las slides se generarán dinámicamente con JavaScript -->
           </div>
         </div>
         <button class="slider-btn prev-btn" onclick="moveSlider(-1)">❮</button>
         <button class="slider-btn next-btn" onclick="moveSlider(1)">❯</button>
-        <div class="slider-dots">
-          <span class="dot active" onclick="currentSlide(1)"></span>
-          <span class="dot" onclick="currentSlide(2)"></span>
-          <span class="dot" onclick="currentSlide(3)"></span>
-          <span class="dot" onclick="currentSlide(4)"></span>
-          <span class="dot" onclick="currentSlide(5)"></span>
-          <span class="dot" onclick="currentSlide(6)"></span>
+        <div class="slider-dots" id="slider-dots">
+          <!-- Los dots se generarán dinámicamente con JavaScript -->
         </div>
       </div>
     </section>
