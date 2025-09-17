@@ -53,22 +53,22 @@
         <div class="slider-wrapper">
           <div class="slider-track" id="slider-track">
             <div class="slide">
-              <img src="img/UltimosPecados1.jpg" alt="Último pecado 1" />
+              <img src="img/UltimosPecados1.jpg" alt="Último pecado 1" onclick="openModal(this)" />
             </div>
             <div class="slide">
-              <img src="img/UltimosPecados2.jpg" alt="Último pecado 2" />
+              <img src="img/UltimosPecados2.jpg" alt="Último pecado 2" onclick="openModal(this)" />
             </div>
             <div class="slide">
-              <img src="img/UltimosPecados3.jpg" alt="Último pecado 3" />
+              <img src="img/UltimosPecados3.jpg" alt="Último pecado 3" onclick="openModal(this)" />
             </div>
             <div class="slide">
-              <img src="img/UltimosPecados4.jpg" alt="Último pecado 4" />
+              <img src="img/UltimosPecados4.jpg" alt="Último pecado 4" onclick="openModal(this)" />
             </div>
             <div class="slide">
-              <img src="img/UltimosPecados5.jpg" alt="Último pecado 5" />
+              <img src="img/UltimosPecados5.jpg" alt="Último pecado 5" onclick="openModal(this)" />
             </div>
             <div class="slide">
-              <img src="img/UltimosPecados6.jpg" alt="Último pecado 6" />
+              <img src="img/UltimosPecados6.jpg" alt="Último pecado 6" onclick="openModal(this)" />
             </div>
           </div>
         </div>
@@ -214,6 +214,12 @@
         <p>&copy; 2025 Creado por DFR Soluciones Integrales SAS. Todos los derechos reservados.</p>
       </div>
     </footer>
+
+    <!-- Modal para ver imagen completa -->
+    <div id="image-modal" class="modal">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <img class="modal-content" id="modal-image" src="" alt="">
+    </div>
   </body>
 </html>
 <script>
@@ -265,6 +271,37 @@
   setInterval(() => {
     moveSlider(1);
   }, 5000);
+
+  // Funcionalidad del modal
+  function openModal(img) {
+    const modal = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-image');
+    modal.style.display = 'block';
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    document.body.style.overflow = 'hidden'; // Prevenir scroll del body
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('image-modal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restaurar scroll del body
+  }
+
+  // Cerrar modal con tecla ESC
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      closeModal();
+    }
+  });
+
+  // Cerrar modal al hacer clic fuera de la imagen
+  document.addEventListener('click', function(event) {
+    const modal = document.getElementById('image-modal');
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
 
   // Inicializar el slider
   document.addEventListener('DOMContentLoaded', function() {
