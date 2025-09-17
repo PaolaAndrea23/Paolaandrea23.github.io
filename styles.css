@@ -434,29 +434,28 @@ body {
     animation-delay: 2s;
 }
 
-/* Estrellas doradas */
-.golden-star {
+/* Herramientas de panadería */
+.bakery-tool {
     position: absolute;
     font-size: 1.8rem;
-    color: #FFD700;
-    opacity: 0.8;
+    opacity: 0.7;
     animation: twinkle 2s ease-in-out infinite;
     z-index: 1;
 }
 
-.golden-star.star-1 {
+.bakery-tool.tool-1 {
     top: 10%;
     right: 20%;
     animation-delay: 0.5s;
 }
 
-.golden-star.star-2 {
+.bakery-tool.tool-2 {
     top: 60%;
     left: 5%;
     animation-delay: 1.5s;
 }
 
-.golden-star.star-3 {
+.bakery-tool.tool-3 {
     bottom: 15%;
     right: 10%;
     animation-delay: 2.5s;
@@ -779,7 +778,7 @@ button[type="submit"]:hover {
         font-size: 2rem;
     }
     
-    .golden-star {
+    .bakery-tool {
         font-size: 1.4rem;
     }
     
