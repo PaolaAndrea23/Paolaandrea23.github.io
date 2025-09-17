@@ -46,40 +46,41 @@
       <a href="contacto.html" class="btn-cta">Contáctanos</a>
     </section>
 
-    <!-- Sección de productos destacados -->
-    <section class="productos" id="productos">
-      <h2>Productos destacados</h2>
-      <div class="productos-lista">
-        <div class="producto-card">
-          <img
-            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
-            alt="Torta de Chocolate"
-          />
-          <h3>Torta de Chocolate</h3>
-          <p>
-            Deliciosa y esponjosa torta rellena y cubierta con el mejor
-            chocolate artesanal.
-          </p>
+    <!-- Sección de últimos pecados -->
+    <section class="ultimos-pecados" id="productos">
+      <h2>Últimos pecados</h2>
+      <div class="slider-container">
+        <div class="slider-wrapper">
+          <div class="slider-track" id="slider-track">
+            <div class="slide">
+              <img src="img/UltimosPecados1.jpg" alt="Último pecado 1" />
+            </div>
+            <div class="slide">
+              <img src="img/UltimosPecados2.jpg" alt="Último pecado 2" />
+            </div>
+            <div class="slide">
+              <img src="img/UltimosPecados3.jpg" alt="Último pecado 3" />
+            </div>
+            <div class="slide">
+              <img src="img/UltimosPecados4.jpg" alt="Último pecado 4" />
+            </div>
+            <div class="slide">
+              <img src="img/UltimosPecados5.jpg" alt="Último pecado 5" />
+            </div>
+            <div class="slide">
+              <img src="img/UltimosPecados6.jpg" alt="Último pecado 6" />
+            </div>
+          </div>
         </div>
-        <div class="producto-card">
-          <img
-            src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80"
-            alt="Cheesecake de Fresa"
-          />
-          <h3>Cheesecake de Fresa</h3>
-          <p>
-            Cremoso cheesecake con base crocante y topping de fresas frescas.
-          </p>
-        </div>
-        <div class="producto-card">
-          <img
-            src="https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80"
-            alt="Brownies Artesanales"
-          />
-          <h3>Brownies Artesanales</h3>
-          <p>
-            Brownies húmedos y chocolatosos, perfectos para acompañar tu café.
-          </p>
+        <button class="slider-btn prev-btn" onclick="moveSlider(-1)">❮</button>
+        <button class="slider-btn next-btn" onclick="moveSlider(1)">❯</button>
+        <div class="slider-dots">
+          <span class="dot active" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+          <span class="dot" onclick="currentSlide(4)"></span>
+          <span class="dot" onclick="currentSlide(5)"></span>
+          <span class="dot" onclick="currentSlide(6)"></span>
         </div>
       </div>
     </section>
@@ -222,4 +223,51 @@
       window.location.href = "contacto.html#sugerencias";
     }
   }
+
+  // Funcionalidad del slider
+  let currentSlideIndex = 0;
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const totalSlides = slides.length;
+
+  function showSlide(index) {
+    const sliderTrack = document.getElementById('slider-track');
+    const slideWidth = 100 / totalSlides;
+    
+    // Mover el track
+    sliderTrack.style.transform = `translateX(-${index * slideWidth}%)`;
+    
+    // Actualizar dots
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === index);
+    });
+    
+    currentSlideIndex = index;
+  }
+
+  function moveSlider(direction) {
+    currentSlideIndex += direction;
+    
+    if (currentSlideIndex >= totalSlides) {
+      currentSlideIndex = 0;
+    } else if (currentSlideIndex < 0) {
+      currentSlideIndex = totalSlides - 1;
+    }
+    
+    showSlide(currentSlideIndex);
+  }
+
+  function currentSlide(index) {
+    showSlide(index - 1);
+  }
+
+  // Auto-slide cada 5 segundos
+  setInterval(() => {
+    moveSlider(1);
+  }, 5000);
+
+  // Inicializar el slider
+  document.addEventListener('DOMContentLoaded', function() {
+    showSlide(0);
+  });
 </script>
