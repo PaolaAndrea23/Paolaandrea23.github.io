@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bendito Pastel</title>
     <link rel="stylesheet" href="styles.css" />
+    <script>
+      (function () {
+        try {
+          if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <!-- Encabezado -->
@@ -18,98 +25,124 @@
           <nav class="nav">
             <a href="#sobre-nosotros">Sobre nosotros</a>
             <a href="#productos">Productos</a>
-            <a href="contacto.html">Contáctanos</a>
+            <a href="contacto.html">Cont&aacute;ctanos</a>
           </nav>
-          <button class="btn-aprende" onclick="aprenderConfirm()">
+          <button class="btn-aprende" type="button" data-action="learn-with-us">
             Aprende con nosotros
+          </button>
+          <button class="theme-toggle" type="button" data-action="toggle-theme" aria-label="Activar modo oscuro" title="Modo oscuro">
+            <span class="theme-icon theme-icon-moon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </span>
+            <span class="theme-icon theme-icon-sun" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            </span>
           </button>
         </div>
       </div>
     </header>
 
-    <!-- Sección principal -->
+    <main>
+    <!-- Seccion principal -->
     <section class="main-banner">
-      <!-- Elementos decorativos de pastelería -->
-      <div class="ingredient-decoration strawberry">🧁</div>
-      <div class="ingredient-decoration chocolate">🍰</div>
-      <div class="ingredient-decoration vanilla">🎂</div>
-      
-      <!-- Elementos de pastelería decorativos adicionales -->
-      <div class="bakery-tool tool-1">🍮</div>
-      <div class="bakery-tool tool-2">🍭</div>
-      <div class="bakery-tool tool-3">🥧</div>
-      <div class="bakery-tool tool-4">🍪</div>
-      
+      <!-- Elementos decorativos de pasteleria -->
+      <div class="ingredient-decoration strawberry" aria-hidden="true">&#127827;</div>
+      <div class="ingredient-decoration chocolate" aria-hidden="true">&#127851;</div>
+
+      <!-- Elementos de pasteleria decorativos adicionales -->
+      <div class="bakery-tool tool-2" aria-hidden="true">&#127856;</div>
+      <div class="bakery-tool tool-4" aria-hidden="true">&#127874;</div>
+
       <div class="banner-content">
         <img
           src="img/Logo.jpg"
           alt="Logo Bendito Pastel Grande"
           class="banner-logo"
+          width="170"
+          height="170"
+          fetchpriority="high"
         />
         <h1>Bendito Pastel</h1>
         <p class="slogan">Pecados hechos con amor</p>
         <p class="since">Since 2023</p>
         <p class="descripcion">
           Disfruta de nuestros postres artesanales, hechos con los mejores
-          ingredientes y una pizca de cariño. ¡Déjate tentar por nuestros sabores
-          únicos!
+          ingredientes y una pizca de cari&ntilde;o. &iexcl;D&eacute;jate tentar por nuestros sabores
+          &uacute;nicos!
         </p>
-        <!-- Botón que redirige a la página de contacto con formularios -->
-        <a href="contacto.html" class="btn-cta">Contáctanos</a>
+        <!-- Boton que redirige a la pagina de contacto con formularios -->
+        <a href="contacto.html" class="btn-cta">Cont&aacute;ctanos</a>
       </div>
     </section>
 
-    <!-- Sección de últimos pecados -->
+    <!-- Seccion de ultimos pecados -->
     <section class="ultimos-pecados" id="productos">
       <!-- Marco dorado decorativo -->
-      <div class="golden-frame"></div>
-      
-      <h2>Últimos pecados</h2>
-      <p class="decorative-subtitle">Delicias recién salidas del horno</p>
+      <div class="golden-frame" aria-hidden="true"></div>
+
+      <h2>&Uacute;ltimos pecados</h2>
+      <p class="decorative-subtitle">Delicias reci&eacute;n salidas del horno</p>
       <div class="slider-container">
         <div class="slider-wrapper">
           <div class="slider-track" id="slider-track">
-            <!-- Las slides se generarán dinámicamente con JavaScript -->
+            <!-- Las slides se generar&aacute;n din&aacute;micamente con JavaScript -->
           </div>
         </div>
-        <button class="slider-btn prev-btn" onclick="moveSlider(-1)">❮</button>
-        <button class="slider-btn next-btn" onclick="moveSlider(1)">❯</button>
+        <button
+          class="slider-btn prev-btn"
+          type="button"
+          data-direction="-1"
+          aria-label="Ver postre anterior"
+        >
+          &#10094;
+        </button>
+        <button
+          class="slider-btn next-btn"
+          type="button"
+          data-direction="1"
+          aria-label="Ver siguiente postre"
+        >
+          &#10095;
+        </button>
         <div class="slider-dots" id="slider-dots">
-          <!-- Los dots se generarán dinámicamente con JavaScript -->
+          <!-- Los dots se generar&aacute;n din&aacute;micamente con JavaScript -->
         </div>
       </div>
     </section>
 
-    <!-- Sección Sobre nosotros -->
+    <!-- Seccion Sobre nosotros -->
     <section class="sobre-nosotros" id="sobre-nosotros">
       <img
         src="img/Logo.jpg"
         alt="Logo Bendito Pastel"
         class="sobre-nosotros-img"
+        width="130"
+        height="130"
+        loading="lazy"
       />
       <h2>Sobre nosotros</h2>
       <p>
-        En Bendito Pastel somos apasionados por la repostería artesanal. Desde
-        2023, creamos postres únicos y deliciosos, hechos con ingredientes de la
+        En Bendito Pastel somos apasionados por la reposter&iacute;a artesanal. Desde
+        2023, creamos postres &uacute;nicos y deliciosos, hechos con ingredientes de la
         mejor calidad y mucho amor. Nuestro objetivo es endulzar tus momentos
-        especiales y convertir cada bocado en un pequeño pecado hecho con
-        cariño.
+        especiales y convertir cada bocado en un peque&ntilde;o pecado hecho con
+        cari&ntilde;o.
       </p>
       <p>
-        Creemos en la tradición, la creatividad y el sabor auténtico. ¡Gracias
-        por confiar en nosotros para acompañar tus celebraciones y antojos!
+        Creemos en la tradici&oacute;n, la creatividad y el sabor aut&eacute;ntico. &iexcl;Gracias
+        por confiar en nosotros para acompa&ntilde;ar tus celebraciones y antojos!
       </p>
     </section>
 
-    <!-- Pie de página -->
+    <!-- Pie de pagina -->
     <footer class="footer">
       <div class="footer-info">
         <p>
-          <strong>Contacto:</strong> benditopastelcakeshop@gmail.com | +57 317 664 1807 | Cali,
+          <strong>Contacto:</strong> benditopastelcakeshop@gmail.com | Cali,
           Colombia
         </p>
         <p>
-          <strong>Horarios de atención:</strong> Lunes a sábado: 8:00 am a 5:00
+          <strong>Horarios de atenci&oacute;n:</strong> Lunes a s&aacute;bado: 8:00 am a 5:00
           pm | Domingo: 8:30 am a 4:00 pm
         </p>
       </div>
@@ -211,18 +244,18 @@
     </footer>
 
     <!-- Modal para ver imagen completa -->
-    <div id="image-modal" class="modal">
-      <span class="modal-close" onclick="closeModal()">&times;</span>
-      <img class="modal-content" id="modal-image" src="" alt="">
+    <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Vista ampliada del postre">
+      <button type="button" class="modal-close" data-action="close-modal" aria-label="Cerrar galeria">&times;</button>
+      <img class="modal-content" id="modal-image" src="" alt="" />
     </div>
 
-    <!-- Botón flotante de WhatsApp -->
-    <div class="whatsapp-float" onclick="openWhatsApp()">
-      <div class="whatsapp-icon">💬</div>
-      <div class="whatsapp-text">¡Contáctanos!</div>
-    </div>
+    <!-- Boton flotante de WhatsApp -->
+    <button class="whatsapp-float" type="button" data-action="open-whatsapp">
+      <span class="whatsapp-icon" aria-hidden="true">&#128172;</span>
+      <span class="whatsapp-text">&iexcl;Cont&aacute;ctanos!</span>
+    </button>
 
     <!-- Referencia al archivo JavaScript -->
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
   </body>
 </html>

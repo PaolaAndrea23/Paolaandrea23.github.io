@@ -1,189 +1,293 @@
-// JS para contacto.html
+// JS para contacto.html e index.html
 
 function showTab(tabId) {
-    document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-    document.querySelector('.tab[onclick*="' + tabId + '"]').classList.add('active');
-    document.getElementById(tabId).classList.add('active');
+  const tabs = document.querySelectorAll('[data-tab-target]');
+  const contents = document.querySelectorAll('.tab-content');
+
+  tabs.forEach((tab) => {
+    const isActive = tab.dataset.tabTarget === tabId;
+    tab.classList.toggle('active', isActive);
+    tab.setAttribute('aria-selected', String(isActive));
+    tab.setAttribute('tabindex', isActive ? '0' : '-1');
+  });
+
+  contents.forEach((content) => {
+    const isActive = content.id === tabId;
+    content.classList.toggle('active', isActive);
+    content.hidden = !isActive;
+  });
 }
 
-// Validación personalizada para el formulario de sugerencias
+// Validacion personalizada para el formulario de sugerencias
 function validarSugerencias(event) {
-    const form = event.target;
-    const telefono = form.telefono.value.trim();
-    const email = form.email_sugerencia.value.trim();
-    const errorDiv = document.getElementById('error-sugerencias');
-    errorDiv.style.display = 'none';
-    errorDiv.textContent = '';
+  const form = event.target;
+  const telefono = form.telefono.value.trim();
+  const email = form.email_sugerencia.value.trim();
+  const errorDiv = document.getElementById('error-sugerencias');
+  errorDiv.style.display = 'none';
+  errorDiv.textContent = '';
 
-    // Validar teléfono: solo números
-    if (!/^\d+$/.test(telefono)) {
-        errorDiv.textContent = 'El teléfono solo debe contener números.';
-        errorDiv.style.display = 'block';
-        form.telefono.focus();
-        event.preventDefault();
-        return false;
-    }
-    // Validar email
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-        errorDiv.textContent = 'Por favor ingresa un correo electrónico válido.';
-        errorDiv.style.display = 'block';
-        form.email_sugerencia.focus();
-        event.preventDefault();
-        return false;
-    }
-    return true;
+  // Validar telefono: solo numeros
+  if (!/^\d+$/.test(telefono)) {
+    errorDiv.textContent = 'El telefono solo debe contener numeros.';
+    errorDiv.style.display = 'block';
+    form.telefono.focus();
+    event.preventDefault();
+    return false;
+  }
+  // Validar email
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    errorDiv.textContent = 'Por favor ingresa un correo electronico valido.';
+    errorDiv.style.display = 'block';
+    form.email_sugerencia.focus();
+    event.preventDefault();
+    return false;
+  }
+  return true;
 }
 
-// Activar automáticamente la pestaña de sugerencias si la URL contiene #sugerencias
-window.addEventListener('DOMContentLoaded', function() {
-    if (window.location.hash === '#sugerencias') {
-        showTab('sugerencias');
-    }
-});
+// ===== CODIGO PARA INDEX.HTML =====
 
-// ===== CÓDIGO PARA INDEX.HTML =====
-
-// Función para confirmar aprendizaje
+// Funcion para confirmar aprendizaje
 function aprenderConfirm() {
-  if (confirm("¿Deseas realmente aprender con nosotros?")) {
-    // Redirige a contacto.html y muestra la pestaña de sugerencias
-    window.location.href = "contacto.html#sugerencias";
+  if (confirm('\u00BFDeseas realmente aprender con nosotros?')) {
+    // Redirige a contacto.html y muestra la pestana de sugerencias
+    window.location.href = 'contacto.html#sugerencias';
   }
 }
 
 // Funcionalidad del slider
 let currentSlideIndex = 0;
-let slides, dots, totalSlides;
+let slides = [];
+let dots = [];
+let totalSlides = 0;
+let autoSlideTimer = null;
+const sliderItems = Array.from({ length: 13 }, (_, index) => ({
+  src: `img/UltimosPecados${index + 1}.jpg`,
+  alt: `Postre artesanal ${index + 1} de Bendito Pastel`,
+}));
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 function initSlider() {
-  // Array de imágenes - fácil de expandir agregando más números
-  // Para agregar más imágenes, simplemente agrega el número al array
-  // Ejemplo: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-  const imageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-  
   const sliderTrack = document.getElementById('slider-track');
   const sliderDots = document.getElementById('slider-dots');
-  
-  if (!sliderTrack || !sliderDots) return;
-  
-  // Limpiar contenido existente
+
+  if (!sliderTrack || !sliderDots || sliderItems.length === 0) return;
+
   sliderTrack.innerHTML = '';
   sliderDots.innerHTML = '';
-  
-  // Generar slides y dots dinámicamente
-  imageNumbers.forEach((number, index) => {
-    // Crear slide
+
+  const slideWidthPercent = 100 / sliderItems.length;
+  sliderItems.forEach((item, index) => {
     const slide = document.createElement('div');
     slide.className = 'slide';
-    slide.style.width = `${100 / imageNumbers.length}%`;
-    slide.innerHTML = `<img src="img/UltimosPecados${number}.jpg" alt="Último pecado ${number}" onclick="openModal(this)" />`;
+    slide.style.flex = `0 0 ${slideWidthPercent}%`;
+
+    const img = document.createElement('img');
+    img.src = item.src;
+    img.alt = item.alt;
+    img.loading = 'lazy';
+    img.addEventListener('click', () => openModal(img));
+
+    slide.appendChild(img);
     sliderTrack.appendChild(slide);
-    
-    // Crear dot
+
     const dot = document.createElement('span');
     dot.className = index === 0 ? 'dot active' : 'dot';
-    dot.onclick = () => currentSlide(index + 1);
+    dot.setAttribute('role', 'button');
+    dot.setAttribute('aria-label', `Ver ${item.alt.toLowerCase()}`);
+    dot.tabIndex = 0;
+    dot.addEventListener('click', () => showSlide(index));
+    dot.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        showSlide(index);
+      }
+    });
     sliderDots.appendChild(dot);
   });
-  
-  // Establecer el ancho total del slider-track
-  sliderTrack.style.width = `${imageNumbers.length * 100}%`;
-  
-  // Actualizar variables globales
-  slides = document.querySelectorAll('.slide');
-  dots = document.querySelectorAll('.dot');
+
+  slides = Array.from(sliderTrack.querySelectorAll('.slide'));
+  dots = Array.from(sliderDots.querySelectorAll('.dot'));
   totalSlides = slides.length;
-  
-  // Inicializar el slider
+  sliderTrack.style.width = `${totalSlides * 100}%`;
+
   showSlide(0);
 }
 
 function showSlide(index) {
+  if (!totalSlides) return;
+
   const sliderTrack = document.getElementById('slider-track');
-  const slideWidth = 100 / totalSlides;
-  
-  // Mover el track
-  sliderTrack.style.transform = `translateX(-${index * slideWidth}%)`;
-  
-  // Actualizar dots
+  if (!sliderTrack) return;
+
+  const boundedIndex = (index + totalSlides) % totalSlides;
+  const offsetPercent = totalSlides > 0 ? (boundedIndex * 100) / totalSlides : 0;
+  sliderTrack.style.transform = `translateX(-${offsetPercent}%)`;
+
   dots.forEach((dot, i) => {
-    dot.classList.toggle('active', i === index);
+    dot.classList.toggle('active', i === boundedIndex);
   });
-  
-  currentSlideIndex = index;
+
+  currentSlideIndex = boundedIndex;
 }
 
 function moveSlider(direction) {
-  currentSlideIndex += direction;
-  
-  if (currentSlideIndex >= totalSlides) {
-    currentSlideIndex = 0;
-  } else if (currentSlideIndex < 0) {
-    currentSlideIndex = totalSlides - 1;
-  }
-  
-  showSlide(currentSlideIndex);
+  if (!totalSlides) return;
+  showSlide(currentSlideIndex + direction);
 }
 
-function currentSlide(index) {
-  showSlide(index - 1);
+function startSliderAutoPlay() {
+  stopSliderAutoPlay();
+  autoSlideTimer = setInterval(() => {
+    moveSlider(1);
+  }, 5000);
+}
+
+function stopSliderAutoPlay() {
+  if (autoSlideTimer) {
+    clearInterval(autoSlideTimer);
+    autoSlideTimer = null;
+  }
+}
+
+function bindSliderControls() {
+  const controls = document.querySelectorAll('[data-direction]');
+  controls.forEach((control) => {
+    const direction = Number(control.dataset.direction);
+    if (Number.isNaN(direction)) return;
+    control.addEventListener('click', () => moveSlider(direction));
+  });
 }
 
 // Funcionalidad del modal
 function openModal(img) {
   const modal = document.getElementById('image-modal');
   const modalImg = document.getElementById('modal-image');
+  if (!modal || !modalImg) return;
+
   modal.style.display = 'block';
   modalImg.src = img.src;
   modalImg.alt = img.alt;
-  document.body.style.overflow = 'hidden'; // Prevenir scroll del body
+  document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
   const modal = document.getElementById('image-modal');
+  const modalImg = document.getElementById('modal-image');
+  if (!modal) return;
   modal.style.display = 'none';
-  document.body.style.overflow = 'auto'; // Restaurar scroll del body
+  if (modalImg) modalImg.removeAttribute('src');
+  document.body.style.overflow = 'auto';
 }
 
-// Inicialización general
-document.addEventListener('DOMContentLoaded', function() {
-  // Inicializar slider si existe
-  if (document.getElementById('slider-track')) {
-    initSlider();
-    showSlide(0);
-    
-    // Auto-slide cada 5 segundos
-    setInterval(() => {
-      moveSlider(1);
-    }, 5000);
+// Funcion para abrir WhatsApp
+function openWhatsApp() {
+  const phoneNumber = '573176641807';
+  const message = '\u00A1Hola! Me interesa conocer m\u00E1s sobre los deliciosos postres de Bendito Pastel.';
+  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
+
+// Modo oscuro: aplicar tema guardado o preferencia del sistema
+function applyTheme(isDark) {
+  const html = document.documentElement;
+  if (isDark) {
+    html.classList.add('dark');
+    try { localStorage.setItem('theme', 'dark'); } catch (_) {}
+  } else {
+    html.classList.remove('dark');
+    try { localStorage.setItem('theme', 'light'); } catch (_) {}
   }
-  
-  // Activar pestaña de sugerencias si es necesario
+  document.querySelectorAll('[data-action="toggle-theme"]').forEach((btn) => {
+    btn.setAttribute('aria-label', isDark ? 'Activar modo claro' : 'Activar modo oscuro');
+    btn.setAttribute('title', isDark ? 'Modo claro' : 'Modo oscuro');
+    const sun = btn.querySelector('.theme-icon-sun');
+    const moon = btn.querySelector('.theme-icon-moon');
+    if (sun) sun.hidden = !isDark;
+    if (moon) moon.hidden = isDark;
+  });
+}
+
+function toggleTheme() {
+  const isDark = document.documentElement.classList.toggle('dark');
+  try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (_) {}
+  document.querySelectorAll('[data-action="toggle-theme"]').forEach((btn) => {
+    btn.setAttribute('aria-label', isDark ? 'Activar modo claro' : 'Activar modo oscuro');
+    btn.setAttribute('title', isDark ? 'Modo claro' : 'Modo oscuro');
+    const sun = btn.querySelector('.theme-icon-sun');
+    const moon = btn.querySelector('.theme-icon-moon');
+    if (sun) sun.hidden = !isDark;
+    if (moon) moon.hidden = isDark;
+  });
+}
+
+// Inicializacion general
+document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('theme');
+  if (savedTheme === 'dark') applyTheme(true);
+  else if (savedTheme === 'light') applyTheme(false);
+
+  document.querySelectorAll('[data-action="toggle-theme"]').forEach((btn) => {
+    btn.addEventListener('click', toggleTheme);
+  });
+
+  const tabButtons = document.querySelectorAll('[data-tab-target]');
+  tabButtons.forEach((tab) => {
+    tab.addEventListener('click', () => showTab(tab.dataset.tabTarget));
+  });
+
   if (window.location.hash === '#sugerencias') {
     showTab('sugerencias');
   }
+
+  const formSugerencias = document.getElementById('form-sugerencias');
+  if (formSugerencias) {
+    formSugerencias.addEventListener('submit', (e) => {
+      if (!validarSugerencias(e)) e.preventDefault();
+    });
+  }
+
+  const learnButton = document.querySelector('[data-action="learn-with-us"]');
+  if (learnButton) {
+    learnButton.addEventListener('click', aprenderConfirm);
+  }
+
+  const whatsappButton = document.querySelector('[data-action="open-whatsapp"]');
+  if (whatsappButton) {
+    whatsappButton.addEventListener('click', openWhatsApp);
+  }
+
+  const modalCloseButton = document.querySelector('[data-action="close-modal"]');
+  if (modalCloseButton) {
+    modalCloseButton.addEventListener('click', closeModal);
+  }
+
+  if (document.getElementById('slider-track')) {
+    initSlider();
+    bindSliderControls();
+    if (!prefersReducedMotion.matches) {
+      startSliderAutoPlay();
+    }
+    prefersReducedMotion.addEventListener('change', (event) => {
+      if (event.matches) {
+        stopSliderAutoPlay();
+      } else {
+        startSliderAutoPlay();
+      }
+    });
+  }
 });
 
-// Cerrar modal con tecla ESC
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     closeModal();
   }
 });
 
-// Cerrar modal al hacer clic fuera de la imagen
-document.addEventListener('click', function(event) {
+document.addEventListener('click', (event) => {
   const modal = document.getElementById('image-modal');
-  if (event.target === modal) {
+  if (modal && modal.style.display === 'block' && event.target === modal) {
     closeModal();
   }
 });
-
-// Función para abrir WhatsApp
-function openWhatsApp() {
-  const phoneNumber = '573176641807';
-  const message = '¡Hola! Me interesa conocer más sobre los deliciosos postres de Bendito Pastel 🧁🎂';
-  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-  window.open(url, '_blank');
-} 

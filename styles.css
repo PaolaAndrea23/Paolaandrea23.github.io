@@ -40,15 +40,6 @@ body {
     width: 100%;
 }
 
-.logo img {
-    height: 48px;
-    width: 48px;
-    border-radius: 50%;
-    background: var(--rosa-claro);
-    border: 3px solid var(--rosa-fuerte);
-    object-fit: cover;
-}
-
 .logo-link {
     display: flex;
     align-items: center;
@@ -133,6 +124,61 @@ body {
     background: var(--marron);
     color: var(--rosa-claro);
     transform: scale(1.05);
+}
+
+/* Botón modo oscuro (luna) */
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    margin-left: 8px;
+    background: var(--rosa-claro);
+    border: 2px solid var(--rosa-fuerte);
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--marron);
+    transition: background 0.2s, color 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.theme-toggle:hover {
+    background: var(--rosa-fuerte);
+    color: var(--blanco);
+    transform: scale(1.08);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--marron);
+    outline-offset: 3px;
+}
+
+.theme-icon {
+    display: block;
+    line-height: 0;
+}
+
+.theme-icon svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+}
+
+.theme-icon-sun {
+    display: none;
+}
+
+.theme-icon-moon {
+    display: block;
+}
+
+html.dark .theme-icon-sun {
+    display: block;
+}
+
+html.dark .theme-icon-moon {
+    display: none;
 }
 
 .main-banner {
@@ -267,6 +313,12 @@ body {
     height: 100%;
     object-fit: cover;
     border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.slide img:hover {
+    transform: scale(1.02);
 }
 
 .slider-btn {
@@ -395,19 +447,9 @@ body {
     }
 }
 
-/* Hacer las imágenes del slider clickeables */
-.slide img {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.slide img:hover {
-    transform: scale(1.02);
-}
-
 /* ===== ELEMENTOS DECORATIVOS ===== */
 
-/* Elementos de pastelería decorativos */
+/* Elementos de pasteleria decorativos */
 .ingredient-decoration {
     position: absolute;
     font-size: 2.5rem;
@@ -434,7 +476,7 @@ body {
     animation-delay: 2s;
 }
 
-/* Elementos de pastelería adicionales */
+/* Elementos de pasteleria adicionales */
 .bakery-tool {
     position: absolute;
     font-size: 1.8rem;
@@ -492,7 +534,7 @@ body {
     opacity: 0.8;
 }
 
-/* Botón flotante de WhatsApp */
+/* Boton flotante de WhatsApp */
 .whatsapp-float {
     position: fixed;
     bottom: 30px;
@@ -511,6 +553,11 @@ body {
     transition: all 0.3s ease;
     font-family: 'Segoe UI', Arial, sans-serif;
     font-weight: 600;
+    border: none;
+    font: inherit;
+    line-height: 1;
+    appearance: none;
+    text-decoration: none;
 }
 
 .whatsapp-float:hover {
@@ -556,6 +603,85 @@ body {
 .banner-content {
     position: relative;
     z-index: 2;
+}
+
+.sobre-nosotros {
+    max-width: 800px;
+    margin: 60px auto 40px auto;
+    background: var(--blanco);
+    border-radius: 24px;
+    box-shadow: 0 2px 12px rgba(255,182,193,0.10);
+    padding: 40px 32px 32px 32px;
+    text-align: center;
+}
+
+.sobre-nosotros h2 {
+    color: var(--marron);
+    font-size: 2rem;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+
+.sobre-nosotros p {
+    color: var(--marron);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    line-height: 1.7;
+}
+
+.sobre-nosotros-img {
+    display: block;
+    margin: 0 auto 18px auto;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--rosa-fuerte);
+    background: var(--blanco);
+    box-shadow: 0 2px 8px rgba(255,182,193,0.10);
+}
+
+/* Tabs (contacto.html) */
+.tabs-container {
+    max-width: 420px;
+    margin: 60px auto 0 auto;
+    background: var(--blanco);
+    border-radius: 18px;
+    box-shadow: 0 2px 12px rgba(255, 182, 193, 0.1);
+    padding: 0 0 28px 0;
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 2px solid var(--rosa-fuerte);
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 18px 0;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--marron);
+    background: var(--blanco);
+    border: none;
+    outline: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tab.active {
+    background: var(--rosa-fuerte);
+    color: var(--blanco);
+}
+
+.tab-content {
+    display: none;
+    padding: 24px 28px 0 28px;
+}
+
+.tab-content.active {
+    display: block;
 }
 
 .formularios {
@@ -823,38 +949,102 @@ button[type="submit"]:hover {
     }
 }
 
-.sobre-nosotros {
-    max-width: 800px;
-    margin: 60px auto 40px auto;
-    background: var(--blanco);
-    border-radius: 24px;
-    box-shadow: 0 2px 12px rgba(255,182,193,0.10);
-    padding: 40px 32px 32px 32px;
-    text-align: center;
+/* Ajustes de accesibilidad y controles interactivos */
+
+.modal-close {
+    border: none;
 }
 
-.sobre-nosotros h2 {
+.btn-aprende:focus-visible,
+.btn-cta:focus-visible,
+.slider-btn:focus-visible,
+.modal-close:focus-visible,
+.whatsapp-float:focus-visible,
+.theme-toggle:focus-visible,
+.tab:focus-visible,
+.dot:focus-visible {
+    outline: 2px solid var(--marron);
+    outline-offset: 3px;
+}
+
+/* ===== MODO OSCURO ===== */
+html.dark {
+    --rosa-claro: #3d2832;
+    --rosa-fuerte: #e895a8;
+    --marron: #e8d5c4;
+    --blanco: #1e1519;
+    --negro: #f5e6ec;
+}
+
+html.dark body {
+    background: linear-gradient(135deg, #1a1215 0%, #2a1c22 100%);
     color: var(--marron);
-    font-size: 2rem;
-    margin-bottom: 18px;
-    letter-spacing: 1px;
 }
 
-.sobre-nosotros p {
-    color: var(--marron);
-    font-size: 1.1rem;
-    margin-bottom: 12px;
-    line-height: 1.7;
-}
-
-.sobre-nosotros-img {
-    display: block;
-    margin: 0 auto 18px auto;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--rosa-fuerte);
+html.dark .header {
     background: var(--blanco);
-    box-shadow: 0 2px 8px rgba(255,182,193,0.10);
-} 
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .main-banner {
+    background: linear-gradient(120deg, #1a1215 60%, #2a1c22 100%);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .slogan {
+    text-shadow: 1px 1px 6px #1a1215, 0 1px 0 #2a1c22, 0 0 2px #e895a8;
+}
+
+html.dark .ultimos-pecados,
+html.dark .formularios {
+    background: #251a1f;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+}
+
+html.dark .slider-container {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+}
+
+html.dark .sobre-nosotros,
+html.dark .tabs-container,
+html.dark .formulario-container {
+    background: #251a1f;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .footer {
+    background: var(--blanco);
+    border-top-color: var(--rosa-fuerte);
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.2);
+}
+
+html.dark .golden-frame {
+    border-color: #b8860b;
+    opacity: 0.5;
+}
+
+html.dark input[type="text"],
+html.dark input[type="email"],
+html.dark input[type="tel"],
+html.dark select,
+html.dark textarea {
+    background: #1a1215;
+    border-color: var(--rosa-fuerte);
+    color: var(--marron);
+}
+
+html.dark .modal {
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ingredient-decoration,
+    .bakery-tool,
+    .whatsapp-icon,
+    .whatsapp-float {
+        animation: none !important;
+    }
+    .slider-track {
+        transition: none !important;
+    }
+}
