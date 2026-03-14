@@ -32,7 +32,6 @@ function validarSugerencias(event) {
     errorDiv.textContent = 'El telefono solo debe contener numeros.';
     errorDiv.style.display = 'block';
     form.telefono.focus();
-    event.preventDefault();
     return false;
   }
   // Validar email
@@ -40,7 +39,6 @@ function validarSugerencias(event) {
     errorDiv.textContent = 'Por favor ingresa un correo electronico valido.';
     errorDiv.style.display = 'block';
     form.email_sugerencia.focus();
-    event.preventDefault();
     return false;
   }
   return true;
@@ -211,15 +209,7 @@ function applyTheme(isDark) {
 
 function toggleTheme() {
   const isDark = document.documentElement.classList.toggle('dark');
-  try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (_) {}
-  document.querySelectorAll('[data-action="toggle-theme"]').forEach((btn) => {
-    btn.setAttribute('aria-label', isDark ? 'Activar modo claro' : 'Activar modo oscuro');
-    btn.setAttribute('title', isDark ? 'Modo claro' : 'Modo oscuro');
-    const sun = btn.querySelector('.theme-icon-sun');
-    const moon = btn.querySelector('.theme-icon-moon');
-    if (sun) sun.hidden = !isDark;
-    if (moon) moon.hidden = isDark;
-  });
+  applyTheme(isDark);
 }
 
 // Inicializacion general
