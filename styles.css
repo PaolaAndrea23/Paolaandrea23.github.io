@@ -1239,13 +1239,12 @@ p { line-height: 1.8; }
   font-weight: 600;
   box-shadow: 0 8px 28px rgba(37, 211, 102, 0.38);
   z-index: 99;
-  transition: all 0.3s ease;
-  animation: waPulse 2.5s infinite;
+  transition: transform 0.3s ease;
+  animation: waPulse 2.5s ease-in-out infinite;
 }
 
 .whatsapp-float:hover {
   transform: scale(1.07);
-  box-shadow: 0 14px 38px rgba(37, 211, 102, 0.55);
   animation: none;
 }
 
@@ -1254,9 +1253,8 @@ p { line-height: 1.8; }
 }
 
 @keyframes waPulse {
-  0%   { box-shadow: 0 8px 28px rgba(37, 211, 102, 0.38); }
-  50%  { box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6), 0 0 0 10px rgba(37, 211, 102, 0.08); }
-  100% { box-shadow: 0 8px 28px rgba(37, 211, 102, 0.38); }
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.06); }
 }
 
 /* =============================================
