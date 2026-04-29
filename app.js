@@ -13,6 +13,7 @@ if (header) {
 // ----- Hero: animacion de entrada de fondo -----
 const heroBg = document.querySelector('.hero-bg');
 if (heroBg) {
+  heroBg.playbackRate = 0.6; // ajustar: 0.5=lento, 0.7=medio, 1.0=normal
   requestAnimationFrame(() => {
     setTimeout(() => heroBg.classList.add('loaded'), 80);
   });
