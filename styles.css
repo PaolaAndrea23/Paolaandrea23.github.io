@@ -1272,7 +1272,7 @@ p { line-height: 1.8; }
   border-radius: inherit;
   background: #25D366;
   z-index: -1;
-  animation: waPulse 4s ease-out infinite;
+  animation: waPulse 4s ease-out 2;
   pointer-events: none;
 }
 
