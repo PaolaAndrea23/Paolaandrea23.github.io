@@ -601,6 +601,28 @@ p { line-height: 1.8; }
   box-shadow: 0 10px 30px rgba(0,0,0,0.16);
 }
 
+.galeria-wrapper {
+  position: relative;
+}
+
+.galeria-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 280px;
+  background: linear-gradient(to bottom, transparent 0%, #F5F3F0 68%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 2rem;
+  pointer-events: none;
+}
+
+.galeria-fade .btn {
+  pointer-events: auto;
+}
+
 /* =============================================
    SECCION: COMMUNITY / CTA
    ============================================= */
