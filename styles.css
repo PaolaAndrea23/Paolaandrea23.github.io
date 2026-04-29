@@ -756,6 +756,9 @@ p { line-height: 1.8; }
 
 .about-story-img img {
   width: 100%;
+  max-width: 380px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
   border-radius: 14px;
   border: 2px solid var(--dorado);
   box-shadow: 0 12px 40px rgba(197, 165, 114, 0.22);
@@ -1282,6 +1285,11 @@ p { line-height: 1.8; }
   .about-story-inner {
     grid-template-columns: 1fr;
     gap: 36px;
+  }
+
+  .about-story-img img {
+    max-width: 100%;
+    aspect-ratio: 4 / 3;
   }
 
   .values-grid {
