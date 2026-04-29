@@ -381,10 +381,10 @@ p { line-height: 1.8; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.06);
+  transition: transform 7s ease;
 }
 
 .hero-bg.loaded {
@@ -756,9 +756,6 @@ p { line-height: 1.8; }
 
 .about-story-img img {
   width: 100%;
-  max-width: 380px;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
   border-radius: 14px;
   border: 2px solid var(--dorado);
   box-shadow: 0 12px 40px rgba(197, 165, 114, 0.22);
@@ -1239,23 +1236,14 @@ p { line-height: 1.8; }
   font-weight: 600;
   box-shadow: 0 8px 28px rgba(37, 211, 102, 0.38);
   z-index: 99;
-  transition: transform 0.3s ease;
-  isolation: isolate;
-}
-
-.whatsapp-float::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: #25D366;
-  z-index: -1;
-  animation: waPulse 2.4s ease-out infinite;
-  pointer-events: none;
+  transition: all 0.3s ease;
+  animation: waPulse 2.5s infinite;
 }
 
 .whatsapp-float:hover {
   transform: scale(1.07);
+  box-shadow: 0 14px 38px rgba(37, 211, 102, 0.55);
+  animation: none;
 }
 
 .whatsapp-float-icon {
@@ -1263,8 +1251,9 @@ p { line-height: 1.8; }
 }
 
 @keyframes waPulse {
-  0%   { transform: scale(1);    opacity: 0.55; }
-  100% { transform: scale(1.45); opacity: 0;    }
+  0%   { box-shadow: 0 8px 28px rgba(37, 211, 102, 0.38); }
+  50%  { box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6), 0 0 0 10px rgba(37, 211, 102, 0.08); }
+  100% { box-shadow: 0 8px 28px rgba(37, 211, 102, 0.38); }
 }
 
 /* =============================================
@@ -1293,11 +1282,6 @@ p { line-height: 1.8; }
   .about-story-inner {
     grid-template-columns: 1fr;
     gap: 36px;
-  }
-
-  .about-story-img img {
-    max-width: 100%;
-    aspect-ratio: 4 / 3;
   }
 
   .values-grid {
