@@ -1,283 +1,169 @@
-// JS para contacto.html e index.html
+// =============================================
+//  BENDITO PASTEL — JavaScript Global
+// =============================================
 
-function showTab(tabId) {
-  const tabs = document.querySelectorAll('[data-tab-target]');
-  const contents = document.querySelectorAll('.tab-content');
-
-  tabs.forEach((tab) => {
-    const isActive = tab.dataset.tabTarget === tabId;
-    tab.classList.toggle('active', isActive);
-    tab.setAttribute('aria-selected', String(isActive));
-    tab.setAttribute('tabindex', isActive ? '0' : '-1');
-  });
-
-  contents.forEach((content) => {
-    const isActive = content.id === tabId;
-    content.classList.toggle('active', isActive);
-    content.hidden = !isActive;
-  });
+// ----- Header: efecto al hacer scroll -----
+const header = document.getElementById('header');
+if (header) {
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
 }
 
-// Validacion personalizada para el formulario de sugerencias
-function validarSugerencias(event) {
-  const form = event.target;
-  const telefono = form.telefono.value.trim();
-  const email = form.email_sugerencia.value.trim();
-  const errorDiv = document.getElementById('error-sugerencias');
-  errorDiv.style.display = 'none';
-  errorDiv.textContent = '';
-
-  // Validar telefono: solo numeros
-  if (!/^\d+$/.test(telefono)) {
-    errorDiv.textContent = 'El telefono solo debe contener numeros.';
-    errorDiv.style.display = 'block';
-    form.telefono.focus();
-    return false;
-  }
-  // Validar email
-  if (!/^\S+@\S+\.\S+$/.test(email)) {
-    errorDiv.textContent = 'Por favor ingresa un correo electronico valido.';
-    errorDiv.style.display = 'block';
-    form.email_sugerencia.focus();
-    return false;
-  }
-  return true;
-}
-
-// ===== CODIGO PARA INDEX.HTML =====
-
-// Funcion para confirmar aprendizaje
-function aprenderConfirm() {
-  if (confirm('\u00BFDeseas realmente aprender con nosotros?')) {
-    // Redirige a contacto.html y muestra la pestana de sugerencias
-    window.location.href = 'contacto.html#sugerencias';
-  }
-}
-
-// Funcionalidad del slider
-let currentSlideIndex = 0;
-let slides = [];
-let dots = [];
-let totalSlides = 0;
-let autoSlideTimer = null;
-const sliderItems = Array.from({ length: 13 }, (_, index) => ({
-  src: `img/UltimosPecados${index + 1}.jpg`,
-  alt: `Postre artesanal ${index + 1} de Bendito Pastel`,
-}));
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-function initSlider() {
-  const sliderTrack = document.getElementById('slider-track');
-  const sliderDots = document.getElementById('slider-dots');
-
-  if (!sliderTrack || !sliderDots || sliderItems.length === 0) return;
-
-  sliderTrack.innerHTML = '';
-  sliderDots.innerHTML = '';
-
-  const slideWidthPercent = 100 / sliderItems.length;
-  sliderItems.forEach((item, index) => {
-    const slide = document.createElement('div');
-    slide.className = 'slide';
-    slide.style.flex = `0 0 ${slideWidthPercent}%`;
-
-    const img = document.createElement('img');
-    img.src = item.src;
-    img.alt = item.alt;
-    img.loading = 'lazy';
-    img.addEventListener('click', () => openModal(img));
-
-    slide.appendChild(img);
-    sliderTrack.appendChild(slide);
-
-    const dot = document.createElement('span');
-    dot.className = index === 0 ? 'dot active' : 'dot';
-    dot.setAttribute('role', 'button');
-    dot.setAttribute('aria-label', `Ver ${item.alt.toLowerCase()}`);
-    dot.tabIndex = 0;
-    dot.addEventListener('click', () => showSlide(index));
-    dot.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        showSlide(index);
-      }
-    });
-    sliderDots.appendChild(dot);
-  });
-
-  slides = Array.from(sliderTrack.querySelectorAll('.slide'));
-  dots = Array.from(sliderDots.querySelectorAll('.dot'));
-  totalSlides = slides.length;
-  sliderTrack.style.width = `${totalSlides * 100}%`;
-
-  showSlide(0);
-}
-
-function showSlide(index) {
-  if (!totalSlides) return;
-
-  const sliderTrack = document.getElementById('slider-track');
-  if (!sliderTrack) return;
-
-  const boundedIndex = (index + totalSlides) % totalSlides;
-  const offsetPercent = totalSlides > 0 ? (boundedIndex * 100) / totalSlides : 0;
-  sliderTrack.style.transform = `translateX(-${offsetPercent}%)`;
-
-  dots.forEach((dot, i) => {
-    dot.classList.toggle('active', i === boundedIndex);
-  });
-
-  currentSlideIndex = boundedIndex;
-}
-
-function moveSlider(direction) {
-  if (!totalSlides) return;
-  showSlide(currentSlideIndex + direction);
-}
-
-function startSliderAutoPlay() {
-  stopSliderAutoPlay();
-  autoSlideTimer = setInterval(() => {
-    moveSlider(1);
-  }, 5000);
-}
-
-function stopSliderAutoPlay() {
-  if (autoSlideTimer) {
-    clearInterval(autoSlideTimer);
-    autoSlideTimer = null;
-  }
-}
-
-function bindSliderControls() {
-  const controls = document.querySelectorAll('[data-direction]');
-  controls.forEach((control) => {
-    const direction = Number(control.dataset.direction);
-    if (Number.isNaN(direction)) return;
-    control.addEventListener('click', () => moveSlider(direction));
+// ----- Hero: animacion de entrada de fondo -----
+const heroBg = document.querySelector('.hero-bg');
+if (heroBg) {
+  requestAnimationFrame(() => {
+    setTimeout(() => heroBg.classList.add('loaded'), 80);
   });
 }
 
-// Funcionalidad del modal
-function openModal(img) {
-  const modal = document.getElementById('image-modal');
-  const modalImg = document.getElementById('modal-image');
-  if (!modal || !modalImg) return;
+// ----- Drawer: menu movil -----
+const menuToggle   = document.getElementById('menu-toggle');
+const drawer       = document.getElementById('drawer');
+const drawerClose  = document.getElementById('drawer-close');
+const drawerOverlay = document.getElementById('drawer-overlay');
 
-  modal.style.display = 'block';
-  modalImg.src = img.src;
-  modalImg.alt = img.alt;
+function openDrawer() {
+  if (!drawer) return;
+  drawer.classList.add('open');
+  if (drawerOverlay) drawerOverlay.classList.add('show');
   document.body.style.overflow = 'hidden';
+  if (drawerClose) drawerClose.focus();
+}
+
+function closeDrawer() {
+  if (!drawer) return;
+  drawer.classList.remove('open');
+  if (drawerOverlay) drawerOverlay.classList.remove('show');
+  document.body.style.overflow = '';
+  if (menuToggle) menuToggle.focus();
+}
+
+if (menuToggle)     menuToggle.addEventListener('click', openDrawer);
+if (drawerClose)    drawerClose.addEventListener('click', closeDrawer);
+if (drawerOverlay)  drawerOverlay.addEventListener('click', closeDrawer);
+
+// ----- Modal: galeria de imagenes -----
+const modal         = document.getElementById('image-modal');
+const modalImg      = document.getElementById('modal-img');
+const modalCloseBtn = document.getElementById('modal-close');
+
+function openModal(src, alt) {
+  if (!modal || !modalImg) return;
+  modalImg.src = src;
+  modalImg.alt = alt || '';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  if (modalCloseBtn) modalCloseBtn.focus();
 }
 
 function closeModal() {
-  const modal = document.getElementById('image-modal');
-  const modalImg = document.getElementById('modal-image');
   if (!modal) return;
-  modal.style.display = 'none';
-  if (modalImg) modalImg.removeAttribute('src');
-  document.body.style.overflow = 'auto';
+  modal.classList.remove('open');
+  if (modalImg) modalImg.src = '';
+  document.body.style.overflow = '';
 }
 
-// Funcion para abrir WhatsApp
-function openWhatsApp() {
-  const phoneNumber = '573176641807';
-  const message = '\u00A1Hola! Me interesa conocer m\u00E1s sobre los deliciosos postres de Bendito Pastel.';
-  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-  window.open(url, '_blank');
-}
-
-// Modo oscuro: aplicar tema guardado o preferencia del sistema
-function applyTheme(isDark) {
-  const html = document.documentElement;
-  if (isDark) {
-    html.classList.add('dark');
-    try { localStorage.setItem('theme', 'dark'); } catch (_) {}
-  } else {
-    html.classList.remove('dark');
-    try { localStorage.setItem('theme', 'light'); } catch (_) {}
-  }
-  document.querySelectorAll('[data-action="toggle-theme"]').forEach((btn) => {
-    btn.setAttribute('aria-label', isDark ? 'Activar modo claro' : 'Activar modo oscuro');
-    btn.setAttribute('title', isDark ? 'Modo claro' : 'Modo oscuro');
-    const sun = btn.querySelector('.theme-icon-sun');
-    const moon = btn.querySelector('.theme-icon-moon');
-    if (sun) sun.hidden = !isDark;
-    if (moon) moon.hidden = isDark;
+if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
+if (modal) {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
   });
 }
 
-function toggleTheme() {
-  const isDark = document.documentElement.classList.toggle('dark');
-  applyTheme(isDark);
-}
-
-// Inicializacion general
-document.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = typeof localStorage !== 'undefined' && localStorage.getItem('theme');
-  if (savedTheme === 'dark') applyTheme(true);
-  else if (savedTheme === 'light') applyTheme(false);
-
-  document.querySelectorAll('[data-action="toggle-theme"]').forEach((btn) => {
-    btn.addEventListener('click', toggleTheme);
-  });
-
-  const tabButtons = document.querySelectorAll('[data-tab-target]');
-  tabButtons.forEach((tab) => {
-    tab.addEventListener('click', () => showTab(tab.dataset.tabTarget));
-  });
-
-  if (window.location.hash === '#sugerencias') {
-    showTab('sugerencias');
+// Cerrar con tecla Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeModal();
+    closeDrawer();
   }
+});
 
-  const formSugerencias = document.getElementById('form-sugerencias');
-  if (formSugerencias) {
-    formSugerencias.addEventListener('submit', (e) => {
-      if (!validarSugerencias(e)) e.preventDefault();
-    });
-  }
+// Galeria clickeable
+document.querySelectorAll('.galeria-grid img').forEach((img) => {
+  img.setAttribute('tabindex', '0');
+  img.setAttribute('role', 'button');
+  img.setAttribute('aria-label', `Ampliar imagen: ${img.alt}`);
 
-  const learnButton = document.querySelector('[data-action="learn-with-us"]');
-  if (learnButton) {
-    learnButton.addEventListener('click', aprenderConfirm);
-  }
-
-  const whatsappButton = document.querySelector('[data-action="open-whatsapp"]');
-  if (whatsappButton) {
-    whatsappButton.addEventListener('click', openWhatsApp);
-  }
-
-  const modalCloseButton = document.querySelector('[data-action="close-modal"]');
-  if (modalCloseButton) {
-    modalCloseButton.addEventListener('click', closeModal);
-  }
-
-  if (document.getElementById('slider-track')) {
-    initSlider();
-    bindSliderControls();
-    if (!prefersReducedMotion.matches) {
-      startSliderAutoPlay();
+  img.addEventListener('click', () => openModal(img.src, img.alt));
+  img.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openModal(img.src, img.alt);
     }
-    prefersReducedMotion.addEventListener('change', (event) => {
-      if (event.matches) {
-        stopSliderAutoPlay();
-      } else {
-        startSliderAutoPlay();
+  });
+});
+
+// ----- Nav activo segun pagina -----
+const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+document.querySelectorAll('.nav-link').forEach((link) => {
+  const href = link.getAttribute('href');
+  link.classList.toggle('active', href === currentPage);
+});
+
+document.querySelectorAll('.drawer-link').forEach((link) => {
+  const href = link.getAttribute('href');
+  link.classList.toggle('active', href === currentPage);
+});
+
+// ----- Nav de productos: resaltado segun seccion visible -----
+if (document.querySelector('.productos-nav')) {
+  const sections = document.querySelectorAll('.productos-section[id]');
+  const navLinks = document.querySelectorAll('.productos-nav-link');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          navLinks.forEach((link) => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${entry.target.id}`);
+          });
+        }
+      });
+    },
+    { rootMargin: '-30% 0px -60% 0px' }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+// ----- Formulario de contacto -----
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+  const successMsg = document.getElementById('form-success');
+
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const btn = contactForm.querySelector('.form-submit');
+    const original = btn.textContent;
+
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    // Simula envio (aqui iria la integracion real con un backend o servicio)
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.disabled = false;
+      contactForm.reset();
+      if (successMsg) {
+        successMsg.style.display = 'block';
+        setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
       }
-    });
-  }
-});
+    }, 1200);
+  });
+}
 
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    closeModal();
-  }
-});
-
-document.addEventListener('click', (event) => {
-  const modal = document.getElementById('image-modal');
-  if (modal && modal.style.display === 'block' && event.target === modal) {
-    closeModal();
-  }
+// ----- Smooth scroll para enlaces de ancla -----
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const offset = 72 + 60; // header + productos-nav
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
 });

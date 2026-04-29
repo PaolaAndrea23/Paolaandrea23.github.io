@@ -1,0 +1,20 @@
+# Documentación interna — no va a producción
+*.md
+memoria/
+.claude/
+
+# Sistema / OS
+.DS_Store
+Thumbs.db
+desktop.ini
+*:Zone.Identifier
+
+# Editor
+.vscode/
+.idea/
+
+# Archivos temporales
+*.tmp
+*.bak
+src/
+DOCUMENTACION_MODULARIZACION.md

@@ -3,261 +3,270 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Bendito Pastel: postres artesanales hechos con amor en Cali, Colombia. Disfruta nuestros sabores únicos desde 2023." />
+    <meta name="description" content="Bendito Pastel — Tortas, Postres, CupCakes artesanales y Cursos de repostería en Cali. Pecados hechos con amor por Andre." />
     <title>Bendito Pastel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <script>
-      (function () {
-        try {
-          if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
-        } catch (e) {}
-      })();
-    </script>
   </head>
   <body>
-    <!-- Encabezado -->
-    <header class="header">
-      <div class="container">
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+      <div class="container header-inner">
         <a href="index.html" class="logo-link">
-          <img src="img/Logo.jpg" alt="Logo Bendito Pastel" class="logo-header" />
-          <span class="logo-nombre">Bendito Pastel</span>
+          <img src="img/Logo.jpg" alt="Bendito Pastel" class="logo-img" />
+          <span class="logo-text">Bendito Pastel</span>
         </a>
-        <div class="header-menu">
-          <nav class="nav">
-            <a href="#sobre-nosotros">Sobre nosotros</a>
-            <a href="#productos">Productos</a>
-            <a href="contacto.html">Cont&aacute;ctanos</a>
-          </nav>
-          <button class="btn-aprende" type="button" data-action="learn-with-us">
-            Aprende con nosotros
-          </button>
-          <button class="theme-toggle" type="button" data-action="toggle-theme" aria-label="Activar modo oscuro" title="Modo oscuro">
-            <span class="theme-icon theme-icon-moon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            </span>
-            <span class="theme-icon theme-icon-sun" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-            </span>
-          </button>
-        </div>
+        <nav class="nav" aria-label="Navegacion principal">
+          <a href="index.html"    class="nav-link active">Inicio</a>
+          <a href="sobre.html"    class="nav-link">Sobre Andre</a>
+          <a href="productos.html" class="nav-link">Productos</a>
+          <a href="contacto.html" class="nav-link">Contacto</a>
+        </nav>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="drawer">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
 
-    <main>
-    <!-- Seccion principal -->
-    <section class="main-banner">
-      <!-- Elementos decorativos de pasteleria -->
-      <div class="ingredient-decoration strawberry" aria-hidden="true">&#127827;</div>
-      <div class="ingredient-decoration chocolate" aria-hidden="true">&#127851;</div>
-
-      <!-- Elementos de pasteleria decorativos adicionales -->
-      <div class="bakery-tool tool-2" aria-hidden="true">&#127856;</div>
-      <div class="bakery-tool tool-4" aria-hidden="true">&#127874;</div>
-
-      <div class="banner-content">
-        <img
-          src="img/Logo.jpg"
-          alt="Logo Bendito Pastel Grande"
-          class="banner-logo"
-          width="170"
-          height="170"
-          fetchpriority="high"
-        />
-        <h1>Bendito Pastel</h1>
-        <p class="slogan">Pecados hechos con amor</p>
-        <p class="since">Since 2023</p>
-        <p class="descripcion">
-          Disfruta de nuestros postres artesanales, hechos con los mejores
-          ingredientes y una pizca de cari&ntilde;o. &iexcl;D&eacute;jate tentar por nuestros sabores
-          &uacute;nicos!
-        </p>
-        <!-- Boton que redirige a la pagina de contacto con formularios -->
-        <a href="contacto.html" class="btn-cta">Cont&aacute;ctanos</a>
+    <!-- ===== DRAWER MOVIL ===== -->
+    <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu de navegacion">
+      <div class="drawer-header">
+        <span class="drawer-logo">Bendito Pastel</span>
+        <button class="drawer-close" id="drawer-close" type="button" aria-label="Cerrar menu">&times;</button>
       </div>
-    </section>
+      <nav class="drawer-nav" aria-label="Navegacion movil">
+        <a href="index.html"     class="drawer-link">Inicio</a>
+        <a href="sobre.html"     class="drawer-link">Sobre Andre</a>
+        <a href="productos.html" class="drawer-link">Productos</a>
+        <a href="contacto.html"  class="drawer-link">Contacto</a>
+      </nav>
+      <div class="drawer-footer">
+        <p>Cali, Valle del Cauca<br>317 664 1807</p>
+      </div>
+    </div>
+    <div class="drawer-overlay" id="drawer-overlay"></div>
 
-    <!-- Seccion de ultimos pecados -->
-    <section class="ultimos-pecados" id="productos">
-      <!-- Marco dorado decorativo -->
-      <div class="golden-frame" aria-hidden="true"></div>
+    <main>
 
-      <h2>&Uacute;ltimos pecados</h2>
-      <p class="decorative-subtitle">Delicias reci&eacute;n salidas del horno</p>
-      <div class="slider-container">
-        <div class="slider-wrapper">
-          <div class="slider-track" id="slider-track">
-            <!-- Las slides se generar&aacute;n din&aacute;micamente con JavaScript -->
+      <!-- ===== HERO ===== -->
+      <section class="hero" aria-label="Seccion principal">
+        <div
+          class="hero-bg"
+          role="img"
+          aria-label="Postres artesanales de Bendito Pastel"
+          style="background-image: url('img/UltimosPecados3.jpg')"
+        ></div>
+        <div class="hero-overlay" aria-hidden="true"></div>
+        <div class="container hero-content">
+          <span class="eyebrow">Reposter&iacute;a artesanal &middot; Cali, Colombia</span>
+          <h1>Pecados hechos<br>con amor</h1>
+          <p class="hero-sub">
+            Tortas, Postres, CupCakes y Cursos de reposter&iacute;a<br>
+            por Paola Andrea Llanos &mdash; <em>Andre</em>
+          </p>
+          <div class="hero-ctas">
+            <a href="productos.html" class="btn btn-primary">Ver productos</a>
+            <a
+              href="https://www.instagram.com/benditopastelshop"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-outline"
+            >Ver galer&iacute;a en Instagram</a>
           </div>
         </div>
-        <button
-          class="slider-btn prev-btn"
-          type="button"
-          data-direction="-1"
-          aria-label="Ver postre anterior"
-        >
-          &#10094;
-        </button>
-        <button
-          class="slider-btn next-btn"
-          type="button"
-          data-direction="1"
-          aria-label="Ver siguiente postre"
-        >
-          &#10095;
-        </button>
-        <div class="slider-dots" id="slider-dots">
-          <!-- Los dots se generar&aacute;n din&aacute;micamente con JavaScript -->
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Seccion Sobre nosotros -->
-    <section class="sobre-nosotros" id="sobre-nosotros">
-      <img
-        src="img/Logo.jpg"
-        alt="Logo Bendito Pastel"
-        class="sobre-nosotros-img"
-        width="130"
-        height="130"
-        loading="lazy"
-      />
-      <h2>Sobre nosotros</h2>
-      <p>
-        En Bendito Pastel somos apasionados por la reposter&iacute;a artesanal. Desde
-        2023, creamos postres &uacute;nicos y deliciosos, hechos con ingredientes de la
-        mejor calidad y mucho amor. Nuestro objetivo es endulzar tus momentos
-        especiales y convertir cada bocado en un peque&ntilde;o pecado hecho con
-        cari&ntilde;o.
-      </p>
-      <p>
-        Creemos en la tradici&oacute;n, la creatividad y el sabor aut&eacute;ntico. &iexcl;Gracias
-        por confiar en nosotros para acompa&ntilde;ar tus celebraciones y antojos!
-      </p>
-    </section>
+      <!-- ===== SOBRE ANDRE (snippet) ===== -->
+      <section class="about-snippet section">
+        <div class="container about-snippet-inner">
+          <div class="about-snippet-img">
+            <img
+              src="img/Logo.jpg"
+              alt="Andre — Paola Andrea Llanos, creadora de Bendito Pastel"
+              loading="lazy"
+            />
+          </div>
+          <div class="about-snippet-text">
+            <span class="eyebrow">Hola, soy</span>
+            <h2>Andre</h2>
+            <div class="separator"></div>
+            <p>
+              Soy Paola Andrea Llanos, apasionada por la reposter&iacute;a artesanal desde 2023.
+              En Bendito Pastel transformo ingredientes en momentos dulces y memorables
+              para cada ocasi&oacute;n especial.
+            </p>
+            <p>
+              Creo en la tradici&oacute;n, la creatividad y el sabor aut&eacute;ntico.
+              Cada postre que preparo lleva una pizca de cari&ntilde;o y mucho amor.
+            </p>
+            <a href="sobre.html" class="btn btn-secondary">Conoce mi historia</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CATEGORIAS ===== -->
+      <section class="categorias section" id="productos">
+        <div class="container">
+          <span class="eyebrow text-center">Lo que ofrezco</span>
+          <h2 class="text-center">Nuestros pecados</h2>
+          <div class="separator mx-auto"></div>
+          <div class="categorias-grid">
+
+            <a href="productos.html#tortas" class="categoria-card">
+              <div class="categoria-img">
+                <img src="img/UltimosPecados1.jpg" alt="Tortas personalizadas" loading="lazy" />
+              </div>
+              <div class="categoria-body">
+                <h3>Tortas</h3>
+                <p>Dise&ntilde;os &uacute;nicos para cada celebraci&oacute;n especial</p>
+              </div>
+            </a>
+
+            <a href="productos.html#postres" class="categoria-card">
+              <div class="categoria-img">
+                <img src="img/UltimosPecados5.jpg" alt="Postres artesanales" loading="lazy" />
+              </div>
+              <div class="categoria-body">
+                <h3>Postres</h3>
+                <p>Delicias artesanales hechas con los mejores ingredientes</p>
+              </div>
+            </a>
+
+            <a href="productos.html#cupcakes" class="categoria-card">
+              <div class="categoria-img">
+                <img src="img/UltimosPecados8.jpg" alt="CupCakes artesanales" loading="lazy" />
+              </div>
+              <div class="categoria-body">
+                <h3>CupCakes</h3>
+                <p>Peque&ntilde;os pecados, grandes sabores</p>
+              </div>
+            </a>
+
+            <a href="productos.html#cursos" class="categoria-card">
+              <div class="categoria-img">
+                <img src="img/UltimosPecados11.jpg" alt="Cursos de reposteria" loading="lazy" />
+              </div>
+              <div class="categoria-body">
+                <h3>Cursos</h3>
+                <p>Aprende el arte de la reposter&iacute;a con Andre</p>
+              </div>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== GALERIA ===== -->
+      <section class="galeria section">
+        <div class="container">
+          <span class="eyebrow text-center">&Uacute;ltimos pecados</span>
+          <h2 class="text-center">Delicias reci&eacute;n salidas del horno</h2>
+          <div class="separator mx-auto"></div>
+          <div class="galeria-grid">
+            <img src="img/UltimosPecados2.jpg"  alt="Postre artesanal de Bendito Pastel" loading="lazy" />
+            <img src="img/UltimosPecados4.jpg"  alt="Postre artesanal de Bendito Pastel" loading="lazy" />
+            <img src="img/UltimosPecados6.jpg"  alt="Postre artesanal de Bendito Pastel" loading="lazy" />
+            <img src="img/UltimosPecados7.jpg"  alt="Postre artesanal de Bendito Pastel" loading="lazy" />
+            <img src="img/UltimosPecados9.jpg"  alt="Postre artesanal de Bendito Pastel" loading="lazy" />
+            <img src="img/UltimosPecados10.jpg" alt="Postre artesanal de Bendito Pastel" loading="lazy" />
+          </div>
+          <div class="text-center" style="margin-top: 2.5rem;">
+            <a
+              href="https://www.instagram.com/benditopastelshop"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-secondary"
+            >Ver m&aacute;s en Instagram</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CTA COMMUNITY ===== -->
+      <section class="community section">
+        <div class="container community-inner">
+          <span class="eyebrow">&Uacute;nete</span>
+          <h2>&iquest;Lista para pecar?</h2>
+          <div class="separator mx-auto"></div>
+          <p>
+            Escribenos y con gusto preparamos ese postre especial que tanto deseas,
+            o reserva tu cupo en nuestros cursos de reposter&iacute;a.
+          </p>
+          <div class="community-ctas">
+            <a
+              href="https://wa.me/573176641807?text=%C2%A1Hola!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20los%20deliciosos%20postres%20de%20Bendito%20Pastel."
+              target="_blank"
+              rel="noopener"
+              class="btn btn-primary"
+            >Escribenos por WhatsApp</a>
+            <a href="contacto.html" class="btn btn-outline-dark">Formulario de contacto</a>
+          </div>
+        </div>
+      </section>
+
     </main>
 
-    <!-- Pie de pagina -->
-    <footer class="footer">
-      <div class="footer-info">
-        <p>
-          <strong>Contacto:</strong> benditopastelcakeshop@gmail.com | Cali,
-          Colombia
-        </p>
-        <p>
-          <strong>Horarios de atenci&oacute;n:</strong> Lunes a s&aacute;bado: 8:00 am a 5:00
-          pm | Domingo: 8:30 am a 4:00 pm
-        </p>
+    <!-- ===== FOOTER ===== -->
+    <footer>
+      <div class="footer-top">
+        <div class="container footer-top-inner">
+          <div class="footer-brand">
+            <img src="img/Logo.jpg" alt="Logo Bendito Pastel" class="footer-logo" />
+            <span class="footer-brand-name">Bendito Pastel</span>
+            <p>Pecados hechos con amor en Cali, Colombia desde 2023.</p>
+          </div>
+          <div class="footer-links">
+            <h4>P&aacute;ginas</h4>
+            <a href="index.html">Inicio</a>
+            <a href="sobre.html">Sobre Andre</a>
+            <a href="productos.html">Productos</a>
+            <a href="contacto.html">Contacto</a>
+          </div>
+          <div class="footer-contact">
+            <h4>Contacto</h4>
+            <p>&#128205; Cali, Valle del Cauca</p>
+            <p>&#128241; 317 664 1807</p>
+            <p>&#9993;&#65039; benditopastelcakeshop@gmail.com</p>
+            <p>&#128336; Lun&ndash;S&aacute;b: 8am&ndash;5pm | Dom: 8:30am&ndash;4pm</p>
+          </div>
+          <div class="footer-social">
+            <h4>S&iacute;guenos</h4>
+            <a href="https://www.instagram.com/benditopastelshop" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://wa.me/573176641807" target="_blank" rel="noopener">WhatsApp</a>
+            <a href="https://www.facebook.com/share/1BoDfkjGMt/" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.tiktok.com/@bendito.pastel28" target="_blank" rel="noopener">TikTok</a>
+          </div>
+        </div>
       </div>
-      <div class="footer-redes">
-        <a href="https://www.instagram.com/benditopastelshop" title="Instagram" class="footer-icon" target="_blank" rel="noopener">&#x1F4F7;</a>
-        <a
-          href="https://www.facebook.com/share/1BoDfkjGMt/"
-          title="Facebook"
-          class="footer-icon"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="24" height="24" rx="4" fill="#3b5998" />
-            <path
-              d="M15.5 8.5H14V7.5C14 7.22 14.22 7 14.5 7H16V4H14.5C12.57 4 11 5.57 11 7.5V8.5H9V11.5H11V20H14V11.5H15.5L16 8.5H14Z"
-              fill="#fff"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://wa.me/573176641807"
-          title="WhatsApp"
-          class="footer-icon"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M16 31C23.732 31 30 24.732 30 17C30 9.26801 23.732 3 16 3C8.26801 3 2 9.26801 2 17C2 19.5109 2.661 21.8674 3.81847 23.905L2 31L9.31486 29.3038C11.3014 30.3854 13.5789 31 16 31ZM16 28.8462C22.5425 28.8462 27.8462 23.5425 27.8462 17C27.8462 10.4576 22.5425 5.15385 16 5.15385C9.45755 5.15385 4.15385 10.4576 4.15385 17C4.15385 19.5261 4.9445 21.8675 6.29184 23.7902L5.23077 27.7692L9.27993 26.7569C11.1894 28.0746 13.5046 28.8462 16 28.8462Z"
-              fill="#BFC8D0"
-            />
-            <path
-              d="M28 16C28 22.6274 22.6274 28 16 28C13.4722 28 11.1269 27.2184 9.19266 25.8837L5.09091 26.9091L6.16576 22.8784C4.80092 20.9307 4 18.5589 4 16C4 9.37258 9.37258 4 16 4C22.6274 4 28 9.37258 28 16Z"
-              fill="url(#paint0_linear_87_7264)"
-            />
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
-              d="M16 30C23.732 30 30 23.732 30 16C30 8.26801 23.732 2 16 2C8.26801 2 2 8.26801 2 16C2 18.5109 2.661 20.8674 3.81847 22.905L2 30L9.31486 28.3038C11.3014 29.3854 13.5789 30 16 30ZM16 27.8462C22.5425 27.8462 27.8462 22.5425 27.8462 16C27.8462 9.45755 22.5425 4.15385 16 4.15385C9.45755 4.15385 4.15385 9.45755 4.15385 16C4.15385 18.5261 4.9445 20.8675 6.29184 22.7902L5.23077 26.7692L9.27993 25.7569C11.1894 27.0746 13.5046 27.8462 16 27.8462Z"
-              fill="white"
-            />
-            <path
-              d="M12.5 9.49989C12.1672 8.83131 11.6565 8.8905 11.1407 8.8905C10.2188 8.8905 8.78125 9.99478 8.78125 12.05C8.78125 13.7343 9.52345 15.578 12.0244 18.3361C14.438 20.9979 17.6094 22.3748 20.2422 22.3279C22.875 22.2811 23.4167 20.0154 23.4167 19.2503C23.4167 18.9112 23.2062 18.742 23.0613 18.696C22.1641 18.2654 20.5093 17.4631 20.1328 17.3124C19.7563 17.1617 19.5597 17.3656 19.4375 17.4765C19.0961 17.8018 18.4193 18.7608 18.1875 18.9765C17.9558 19.1922 17.6103 19.083 17.4665 19.0015C16.9374 18.7892 15.5029 18.1511 14.3595 17.0426C12.9453 15.6718 12.8623 15.2001 12.5959 14.7803C12.3828 14.4444 12.5392 14.2384 12.6172 14.1483C12.9219 13.7968 13.3426 13.254 13.5313 12.9843C13.7199 12.7145 13.5702 12.305 13.4803 12.05C13.0938 10.953 12.7663 10.0347 12.5 9.49989Z"
-              fill="white"
-            />
-            <defs>
-              <linearGradient
-                id="paint0_linear_87_7264"
-                x1="26.5"
-                y1="7"
-                x2="4"
-                y2="28"
-                gradientUnits="userSpaceOnUse"
-              >
-                <stop stop-color="#5BD066" />
-                <stop offset="1" stop-color="#27B43E" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </a>
-        <a
-          href="https://www.tiktok.com/@bendito.pastel28?_t=ZS-8xV4LwdbDV9&_r=1"
-          title="TikTok"
-          class="footer-icon"
-          target="_blank"
-          rel="noopener"
-        >
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 512 512"
-            xmlns="http://www.w3.org/2000/svg"
-            style="vertical-align: middle"
-          >
-            <path
-              d="M412.19,118.66a109.27,109.27,0,0,1-9.45-5.5,132.87,132.87,0,0,1-24.27-20.62c-18.1-20.71-24.86-41.72-27.35-56.43h.1C349.14,23.9,350,16,350.13,16H267.69V334.78c0,4.28,0,8.51-.18,12.69,0,.52-.05,1-.08,1.56,0,.23,0,.47-.05.71,0,.06,0,.12,0,.18a70,70,0,0,1-35.22,55.56,68.8,68.8,0,0,1-34.11,9c-38.41,0-69.54-31.32-69.54-70s31.13-70,69.54-70a68.9,68.9,0,0,1,21.41,3.39l.1-83.94a153.14,153.14,0,0,0-118,34.52,161.79,161.79,0,0,0-35.3,43.53c-3.48,6-16.61,30.11-18.2,69.24-1,22.21,5.67,45.22,8.85,54.73v.2c2,5.6,9.75,24.71,22.38,40.82A167.53,167.53,0,0,0,115,470.66v-.2l.2.2C155.11,497.78,199.36,496,199.36,496c7.66-.31,33.32,0,62.46-13.81,32.32-15.31,50.72-38.12,50.72-38.12a158.46,158.46,0,0,0,27.64-45.93c7.46-19.61,9.95-43.13,9.95-52.53V176.49c1,.6,14.32,9.41,14.32,9.41s19.19,12.3,49.13,20.31c21.48,5.7,50.42,6.9,50.42,6.9V131.27C453.86,132.37,433.27,129.17,412.19,118.66Z"
-            />
-          </svg>
-        </a>
-      </div>
-      <div class="footer-copy">
-        <p>&copy; 2025 Creado por DFR Soluciones Integrales SAS. Todos los derechos reservados.</p>
+      <div class="footer-bottom">
+        <div class="container">
+          <p>&copy; 2025 Bendito Pastel &middot; Todos los derechos reservados</p>
+        </div>
       </div>
     </footer>
 
-    <!-- Modal para ver imagen completa -->
-    <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Vista ampliada del postre">
-      <button type="button" class="modal-close" data-action="close-modal" aria-label="Cerrar galeria">&times;</button>
-      <img class="modal-content" id="modal-image" src="" alt="" />
+    <!-- ===== MODAL GALERIA ===== -->
+    <div id="image-modal" class="modal" role="dialog" aria-modal="true" aria-label="Vista ampliada">
+      <button id="modal-close" class="modal-close-btn" type="button" aria-label="Cerrar imagen">&times;</button>
+      <img id="modal-img" class="modal-img" src="" alt="" />
     </div>
 
-    <!-- Boton flotante de WhatsApp -->
-    <button class="whatsapp-float" type="button" data-action="open-whatsapp">
-      <span class="whatsapp-icon" aria-hidden="true">&#128172;</span>
-      <span class="whatsapp-text">&iexcl;Cont&aacute;ctanos!</span>
-    </button>
+    <!-- ===== BOTON FLOTANTE WHATSAPP ===== -->
+    <a
+      href="https://wa.me/573176641807?text=%C2%A1Hola!%20Me%20interesa%20conocer%20m%C3%A1s%20sobre%20los%20deliciosos%20postres%20de%20Bendito%20Pastel."
+      class="whatsapp-float"
+      target="_blank"
+      rel="noopener"
+      aria-label="Contactar por WhatsApp"
+    >
+      <span class="whatsapp-float-icon" aria-hidden="true">&#128172;</span>
+      <span class="whatsapp-float-text">&iexcl;Cont&aacute;ctanos!</span>
+    </a>
 
-    <!-- Referencia al archivo JavaScript -->
-    <script src="app.js" defer></script>
+    <script src="app.js"></script>
   </body>
 </html>
