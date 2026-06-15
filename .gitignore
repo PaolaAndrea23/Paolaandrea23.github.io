@@ -18,3 +18,7 @@ desktop.ini
 *.bak
 src/
 DOCUMENTACION_MODULARIZACION.md
+
+# Config de agente / backups internos — no van al repo público
+CLAUDE.md.bp
+PosibleNuevaPagina/
