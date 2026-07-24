@@ -1194,6 +1194,33 @@ p { line-height: 1.8; }
   text-align: center;
 }
 
+/* ----- New .bp-* classes (contact form additions) -----
+   NOTE: the rest of this stylesheet uses semantic, non-.bp-* class names.
+   That pre-dates this task; only NEW markup added here uses the .bp-* prefix. */
+
+.bp-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bp-form-error {
+  display: none;
+  background: #fdecea;
+  border: 1.5px solid #f5c6cb;
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  color: #c62828;
+  margin-top: 16px;
+  text-align: center;
+}
+
 /* =============================================
    MODAL (galeria)
    ============================================= */

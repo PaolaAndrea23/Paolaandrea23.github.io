@@ -2,6 +2,14 @@
 //  BENDITO PASTEL — JavaScript Global
 // =============================================
 
+// ----- Contact form endpoint (FormSubmit) -----
+// Messages go to the shop owner (Andre). FormSubmit requires a one-time
+// activation: the first submission triggers a confirmation email that must be
+// clicked before any message is actually delivered.
+const FORM_ENDPOINT = 'https://formsubmit.co/benditopastelcakeshop@gmail.com';
+// NOTE: src/config.js exists but is NOT loaded by any page (it uses ES `export`
+// while app.js is a classic <script>). Keep FORM_ENDPOINT here so it actually runs.
+
 // ----- Header: efecto al hacer scroll -----
 const header = document.getElementById('header');
 if (header) {
@@ -134,26 +142,66 @@ if (document.querySelector('.productos-nav')) {
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   const successMsg = document.getElementById('form-success');
+  const errorMsg   = contactForm.querySelector('.bp-form-error');
+  const btn        = contactForm.querySelector('.form-submit');
+  const originalLabel = btn ? btn.textContent : 'Enviar mensaje';
 
-  contactForm.addEventListener('submit', (e) => {
+  // Set the real action/method so the form is also usable without JS.
+  contactForm.setAttribute('method', 'POST');
+  contactForm.setAttribute('action', FORM_ENDPOINT);
+  contactForm.setAttribute('accept-charset', 'utf-8');
+
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const btn = contactForm.querySelector('.form-submit');
-    const original = btn.textContent;
+    // Hide any previous feedback.
+    if (successMsg) successMsg.style.display = 'none';
+    if (errorMsg) errorMsg.style.display = 'none';
 
-    btn.textContent = 'Enviando...';
-    btn.disabled = true;
-
-    // Simula envio (aqui iria la integracion real con un backend o servicio)
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.disabled = false;
+    // Honeypot: if the hidden field is filled, treat as spam and silently "succeed".
+    const honeypot = contactForm.querySelector('input[name="_gotcha"]');
+    if (honeypot && honeypot.value) {
       contactForm.reset();
-      if (successMsg) {
-        successMsg.style.display = 'block';
-        setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
+      if (successMsg) successMsg.style.display = 'block';
+      return;
+    }
+
+    // Native validation first (form has novalidate; checkValidity drives the bubbles).
+    if (typeof contactForm.checkValidity === 'function' && !contactForm.checkValidity()) {
+      contactForm.reportValidity();
+      return;
+    }
+
+    if (!btn) return;
+    btn.disabled = true;
+    btn.textContent = 'Enviando...';
+
+    try {
+      const payload = Object.fromEntries(new FormData(contactForm).entries());
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        contactForm.reset();
+        if (successMsg) {
+          successMsg.style.display = 'block';
+          setTimeout(() => { successMsg.style.display = 'none'; }, 6000);
+        }
+      } else {
+        throw new Error(`HTTP ${res.status}`);
       }
-    }, 1200);
+    } catch (err) {
+      // Visible error: do NOT silently succeed.
+      if (errorMsg) errorMsg.style.display = 'block';
+      // eslint-disable-next-line no-console
+      console.error('[contact-form] submit failed:', err);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalLabel;
+    }
   });
 }
 
